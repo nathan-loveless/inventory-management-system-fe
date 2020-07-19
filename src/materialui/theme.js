@@ -4,9 +4,9 @@ const primaryLight = "#ddebee";
 const primaryMain = "#75b0bd";
 const primaryDark = "#325d67";
 
-const secondaryLight = "#f5e6d6";
-const secondaryMain = "#d79b5b";
-const secondaryDark = "#7b4e1e";
+const secondaryLight = "#f1ecda";
+const secondaryMain = "#c7b36b";
+const secondaryDark = "#6f602a";
 
 export default createMuiTheme({
   palette: {
