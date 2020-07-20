@@ -21,12 +21,11 @@ const LoginForm = props => {
     e.preventDefault();
     props.userLogon(
       {
-        login: data.username,
+        username: data.username,
         password: data.password
       },
       props
     );
-    console.log(data);
   };
 
   return (
@@ -51,6 +50,7 @@ const LoginForm = props => {
                     margin="normal"
                     required
                     fullWidth
+                    value="nathansl2003"
                     id="username"
                     label="User Name"
                     color="secondary"
@@ -76,6 +76,7 @@ const LoginForm = props => {
                     margin="normal"
                     required
                     fullWidth
+                    value="Password@1"
                     id="password"
                     label="Password"
                     color="secondary"

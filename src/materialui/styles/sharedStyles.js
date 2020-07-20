@@ -2,18 +2,18 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const sharedStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.secondary.light,
+    background: theme.palette.secondary.light,
     height: "100vh"
   },
   menuBar: {
-    backgroundColor: theme.palette.primary.main
+    background: theme.palette.primary.main
   },
   toolBar: {
     display: "flex",
     justifyContent: "flex-end"
   },
   standardButton: {
-    backgroundColor: theme.palette.primary.light,
+    background: theme.palette.primary.light,
 
     fontWeight: "bold",
     margin: "5px"

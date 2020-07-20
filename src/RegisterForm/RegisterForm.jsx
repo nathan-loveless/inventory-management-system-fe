@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { registerAccount, taskStart } from "../actions/actions";
 import { sharedStyles } from "../materialui/styles/sharedStyles";
 import TextField from "@material-ui/core/TextField";
@@ -10,9 +10,13 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { formStyles } from "../materialui/styles/formStyles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import { usStates } from "../usStates";
 
 const RegisterForm = props => {
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit, control } = useForm();
 
   const onSubmit = (data, e) => {
     e.preventDefault();
@@ -26,12 +30,12 @@ const RegisterForm = props => {
         city: data.city,
         state: data.state,
         zipcode: data.zipcode,
-        email: data.email
+        email: data.email,
+        status: "",
+        role: ""
       },
       props
     );
-    console.log(data);
-    console.log(data.suite);
   };
 
   const classes = formStyles();
@@ -58,6 +62,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    value="Nathan"
                     id="firstName"
                     label="First Name"
                     color="secondary"
@@ -82,6 +87,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    value="Loveless"
                     id="lastName"
                     label="Last Name"
                     color="secondary"
@@ -105,6 +111,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    value="161 Central Street Apt. B"
                     id="address"
                     label="Address"
                     color="secondary"
@@ -128,6 +135,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    value="Northfield"
                     id="city"
                     label="City"
                     color="secondary"
@@ -143,12 +151,34 @@ const RegisterForm = props => {
                   )}
                 </Grid>
                 <Grid item xs={4}>
+                  {/* <InputLabel id="demo-simple-select-outlined-label">
+                    User Type
+                  </InputLabel>
+                  <Controller
+                    as={
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        label="City"
+                        color="secondary"
+                      >
+                        {usStates.states.map(state => (
+                          <MenuItem value={state}>{state}</MenuItem>
+                        ))}
+                      </Select>
+                    }
+                    name="userType"
+                    rules={{ required: "You must select a user type" }}
+                    control={control}
+                    defaultValue=""
+                  /> */}
                   <TextField
                     type="text"
                     name="state"
                     variant="outlined"
                     required
                     fullWidth
+                    value="Vermont"
                     id="state"
                     label="State"
                     color="secondary"
@@ -170,6 +200,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    value="05663"
                     id="zipcode"
                     label="Zip Code"
                     color="secondary"
@@ -196,6 +227,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    value="nathansl2003"
                     id="username"
                     label="User Name"
                     color="secondary"
@@ -219,6 +251,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    value="nathansl2003@yahaoo.com"
                     id="email"
                     label="Email Address"
                     color="secondary"
@@ -243,6 +276,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    value="Password@1"
                     id="password"
                     label="Password"
                     color="secondary"

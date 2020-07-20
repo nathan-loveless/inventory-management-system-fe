@@ -2,31 +2,41 @@ import { REGISTER_ACCOUNT, LOGIN, LOGOUT } from "../actions/actions";
 import { TASK_START, TASK_FAIL } from "../actions/actions";
 
 const initialState = {
-  user: {}
+  user: {
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    email: "",
+    status: "",
+    role: ""
+  },
+
+  message: ""
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case REGISTER_ACCOUNT: {
+      console.log(
+        "NL: Reducers: Register: action.payload: ",
+        action.payload.message
+      );
       return {
         ...state,
-        message: action.payload.message,
-        isLoading: false
+        message: action.payload.message
       };
     }
 
     case LOGIN: {
-      console.log(
-        "NL: reducer.js: USER_LOGON: action.payload.AuthorContent: ",
-        action.payload.AuthorContent
-      );
       return {
         ...state,
-        user: action.payload.User,
-        authorContent: action.payload.AuthorContent,
-        contentLibrary: action.payload.ContentLibrary,
-        isLogged: true,
-        isLoading: false
+        user: action.payload.user,
+        message: action.payload.message
       };
     }
 
@@ -47,7 +57,7 @@ function reducer(state = initialState, action) {
     case TASK_FAIL: {
       return {
         ...state,
-        error: action.payload,
+        message: action.payload.message,
         isLoading: false
       };
     }

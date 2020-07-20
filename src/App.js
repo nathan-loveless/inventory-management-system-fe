@@ -8,6 +8,8 @@ import PrivateRoute from "./auth/PrivateRoute";
 import theme from "./materialui/theme";
 import Home from "./Home/Home";
 import Header from "./Header/Header";
+import RegSuccessful from "./RegisterForm/RegSuccessful";
+import RegUnsuccessful from "./RegisterForm/RegUnsuccessful";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/register" component={RegisterForm} />
-          <PrivateRoute exact path="/portal" compoent={Portal} />
+          <Route exact path="/regsuccessful" component={RegSuccessful} />
+          <Route exact path="/regunsuccessful" component={RegUnsuccessful} />
+          <PrivateRoute exact path="/portal" component={Portal} />
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
