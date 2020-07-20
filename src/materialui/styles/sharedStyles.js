@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const sharedStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.secondary.light
+    backgroundColor: theme.palette.secondary.light,
+    height: "100vh"
   },
   menuBar: {
     backgroundColor: theme.palette.primary.main

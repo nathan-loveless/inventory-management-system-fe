@@ -7,11 +7,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./auth/PrivateRoute";
 import theme from "./materialui/theme";
 import Home from "./Home/Home";
+import Header from "./Header/Header";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={LoginForm} />

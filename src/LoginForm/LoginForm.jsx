@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { sharedStyles } from "../materialui/styles/sharedStyles";
 import TextField from "@material-ui/core/TextField";
@@ -8,7 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { formStyles } from "../materialui/styles/formStyles";
-const LoginForm = () => {
+import { userLogon, taskStart } from "../actions/actions";
+
+const LoginForm = props => {
   const { register, errors, handleSubmit } = useForm();
 
   const classes = formStyles();
@@ -16,6 +19,13 @@ const LoginForm = () => {
 
   const onSubmit = (data, e) => {
     e.preventDefault();
+    props.userLogon(
+      {
+        login: data.username,
+        password: data.password
+      },
+      props
+    );
     console.log(data);
   };
 
@@ -111,4 +121,6 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps, { userLogon, taskStart })(LoginForm);
