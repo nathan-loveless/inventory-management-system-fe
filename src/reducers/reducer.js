@@ -16,7 +16,11 @@ const initialState = {
     role: ""
   },
 
-  message: ""
+  message: "",
+  isAdmin: false,
+  activeUsers: [],
+  inactiveUsers: [],
+  pendingUsers: []
 };
 
 function reducer(state = initialState, action) {

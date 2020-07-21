@@ -12,7 +12,7 @@ const PortalNav = props => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={1} className={classes.container}>
+      <Grid container spacing={1}>
         <Grid item xs={12}>
           <Button
             variant="contained"
