@@ -33,7 +33,7 @@ export const userLogon = (data, props) => dispatch => {
       localStorage.setItem("token", res.data.token);
       dispatch({ type: LOGIN, payload: res.data });
       console.log("NL: actions.js: userLogon: data: ", data);
-      props.history.push("/portal");
+      props.history.push("/portal/dashboard");
     })
     .catch(err => {
       dispatch({ type: TASK_FAIL, payload: err.message });

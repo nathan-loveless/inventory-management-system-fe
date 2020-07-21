@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { registerAccount, taskStart } from "../actions/actions";
 import { sharedStyles } from "../materialui/styles/sharedStyles";
 import TextField from "@material-ui/core/TextField";
@@ -10,13 +10,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { formStyles } from "../materialui/styles/formStyles";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import { usStates } from "../usStates";
 
 const RegisterForm = props => {
-  const { register, errors, handleSubmit, control } = useForm();
+  const { register, errors, handleSubmit } = useForm();
 
   const onSubmit = (data, e) => {
     e.preventDefault();
