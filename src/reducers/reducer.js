@@ -1,4 +1,11 @@
-import { REGISTER_ACCOUNT, LOGIN, LOGOUT } from "../actions/actions";
+import {
+  REGISTER_ACCOUNT,
+  LOGIN,
+  LOGOUT,
+  GET_ACTIVE_USERS,
+  GET_INACTIVE_USERS,
+  GET_PENDING_USERS
+} from "../actions/actions";
 import { TASK_START, TASK_FAIL } from "../actions/actions";
 
 const initialState = {
@@ -40,7 +47,8 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload.user,
-        message: action.payload.message
+        message: action.payload.message,
+        isAdmin: action.payload.isAdmin
       };
     }
 
@@ -49,6 +57,16 @@ function reducer(state = initialState, action) {
         ...state,
         isLogged: false
       };
+    }
+
+    case GET_ACTIVE_USERS: {
+      return { ...state, activeUsers: action.payload };
+    }
+    case GET_INACTIVE_USERS: {
+      return { ...state, inactiveUsers: action.payload };
+    }
+    case GET_PENDING_USERS: {
+      return { ...state, pendingUsers: action.payload };
     }
 
     case TASK_START: {

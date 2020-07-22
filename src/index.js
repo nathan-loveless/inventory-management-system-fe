@@ -9,12 +9,17 @@ import {
   loadFromLocalStorage
 } from "./localStorage/sessionData";
 import App from "./App";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 require("dotenv").config();
 
 const persistedState = loadFromLocalStorage();
 
-const store = createStore(reducer, persistedState, applyMiddleware(thunk));
+const store = createStore(
+  reducer,
+  persistedState,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 store.subscribe(() => {
   saveToLocalStorage(store.getState());
