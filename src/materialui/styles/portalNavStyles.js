@@ -4,7 +4,7 @@ export const portalNavStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.primary.main,
     height: "99vh",
-    width: "35vh",
+    width: "30vh",
     margin: "5px 5px 0px 2px",
     padding: "4px 4px 0px 4px",
     boxSizing: "border-box",

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 import { AppBar } from "@material-ui/core";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
-import ActiveUsers from "./ActiveUsers";
-import InactiveUsers from "./InactiveUsers";
-import PendingUsers from "./PendingUsers";
+import { administrationStyles } from "../../../materialui/styles/administrationStyles";
+import DisplayUsers from "./DisplayUsers";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -21,7 +19,7 @@ function TabPanel(props) {
       aria-labelledby={`administration-tab-${index}`}
       {...other}
     >
-      {value === index && <Typography>{children}</Typography>}
+      {value === index && <Typography component={"div"}>{children}</Typography>}
     </div>
   );
 }
@@ -39,17 +37,15 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
-  }
-}));
-
-const Administration = () => {
+const Administration = props => {
   const [value, setValue] = useState(0);
+  const [allUsers, setAllUsers] = useState([
+    props.activeUsers,
+    props.inactiveUsers,
+    props.pendingUsers
+  ]);
 
-  const classes = useStyles();
+  const classes = administrationStyles();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -60,22 +56,33 @@ const Administration = () => {
         value={value}
         onChange={handleChange}
         aria-label="administration tabs"
+        className={classes.menuBar}
       >
-        <Tab label="Active Users" {...a11yProps(0)} />
-        <Tab label="Inactive Users" {...a11yProps(1)} />
-        <Tab label="Pending Users" {...a11yProps(2)} />
+        <Tab label="All Users" {...a11yProps(0)} />
+        <Tab label="Active Users" {...a11yProps(1)} />
+        <Tab label="Inactive Users" {...a11yProps(2)} />
+        <Tab label="Pending Users" {...a11yProps(3)} />
       </Tabs>
+
       <TabPanel value={value} index={0}>
-        <ActiveUsers />
+        <div className={classes.tabContainer}></div>
+        <DisplayUsers
+          users={[props.activeUsers, props.inactiveUsers, props.pendingUsers]}
+        />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <InactiveUsers />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <PendingUsers />
-      </TabPanel>
+      {allUsers.map((users, i) => (
+        <TabPanel value={value} index={i + 1}>
+          <DisplayUsers users={[users]} />
+        </TabPanel>
+      ))}
     </AppBar>
   );
 };
 
-export default Administration;
+const mapStateToProps = state => ({
+  activeUsers: state.activeUsers,
+  inactiveUsers: state.inactiveUsers,
+  pendingUsers: state.pendingUsers
+});
+
+export default connect(mapStateToProps, {})(Administration);
