@@ -11,11 +11,11 @@ export const portalToolbarStyles = makeStyles(theme => ({
   toolBar: {
     display: "flex",
     justifyContent: "flex-end"
-  },
-  standardButton: {
-    background: theme.palette.primary.light,
-
-    fontWeight: "bold",
-    margin: "5px"
   }
+  // standardButton: {
+  //   background: theme.palette.primary.light,
+
+  //   fontWeight: "bold",
+  //   margin: "5px"
+  // }
 }));

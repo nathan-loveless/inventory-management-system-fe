@@ -3,11 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 export const portalNavStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.primary.main,
-    height: "99vh",
+    height: "auto",
     width: "30vh",
-    margin: "5px 5px 0px 2px",
-    padding: "4px 4px 0px 4px",
-    boxSizing: "border-box",
+    margin: "5px 5px 5px 5px",
+    padding: "5px 5px 5px 5px",
     border: "1px solid grey"
   },
   button: {

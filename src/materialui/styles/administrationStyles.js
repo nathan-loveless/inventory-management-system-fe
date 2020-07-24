@@ -1,21 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const administrationStyles = makeStyles(theme => ({
+  menuBarMain: {
+    margin: "5px 5px 5px 5px"
+  },
   menuBar: {
-    background: theme.palette.secondary.light,
-    height: "100vh",
-    width: "100vh",
+    background: "#dcd0a3",
     display: "flex",
     flexDirection: "column"
-  },
-  menuBar: {
-    marginBottom: "5px"
-  },
-  tabPanel: {
-    paddingTop: "5px"
-  },
-  tabContainer: {
-    paddingTop: "5px",
-    backgroundColor: theme.palette.primary.light
   }
 }));

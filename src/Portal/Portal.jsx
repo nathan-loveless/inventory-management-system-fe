@@ -10,6 +10,7 @@ import Administration from "./PortalComponents/Administration/Administration";
 
 const Portal = () => {
   const [component, setComponent] = useState(<Dashboard />);
+
   const classes = portalStyles();
 
   const changeComponent = component => {
@@ -47,10 +48,12 @@ const Portal = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <PortalNav changeComponent={changeComponent} />
-      <PortalMain component={component} />
-    </div>
+    <>
+      <div className={classes.root}>
+        <PortalNav changeComponent={changeComponent} />
+        <PortalMain component={component} />
+      </div>
+    </>
   );
 };
 
