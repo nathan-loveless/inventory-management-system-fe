@@ -4,12 +4,16 @@ import {
   LOGOUT,
   GET_ACTIVE_USERS,
   GET_INACTIVE_USERS,
-  GET_PENDING_USERS
+  GET_PENDING_USERS,
+  UPDATE_USER,
+  DELETE_USER,
+  TASK_START,
+  TASK_FAIL
 } from "../actions/actions";
-import { TASK_START, TASK_FAIL } from "../actions/actions";
 
 const initialState = {
   user: {
+    id: "",
     username: "",
     password: "",
     firstName: "",
@@ -60,6 +64,10 @@ function reducer(state = initialState, action) {
     }
 
     case GET_ACTIVE_USERS: {
+      console.log(
+        "NL: reducer.js: GET_ACTIVE_USERS: payload: ",
+        action.payload
+      );
       return { ...state, activeUsers: action.payload };
     }
     case GET_INACTIVE_USERS: {
@@ -67,6 +75,14 @@ function reducer(state = initialState, action) {
     }
     case GET_PENDING_USERS: {
       return { ...state, pendingUsers: action.payload };
+    }
+
+    case UPDATE_USER: {
+      return { ...state, user: action.payload };
+    }
+
+    case DELETE_USER: {
+      return { ...state, user: action.payload };
     }
 
     case TASK_START: {

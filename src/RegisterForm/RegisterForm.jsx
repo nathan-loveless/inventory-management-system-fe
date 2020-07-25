@@ -30,7 +30,8 @@ const RegisterForm = props => {
         status: "",
         role: ""
       },
-      props
+      props.user.status,
+      props.user.role
     );
   };
 
@@ -58,7 +59,7 @@ const RegisterForm = props => {
                     variant="outlined"
                     required
                     fullWidth
-                    value="Nathan"
+                    value=""
                     id="firstName"
                     label="First Name"
                     color="secondary"

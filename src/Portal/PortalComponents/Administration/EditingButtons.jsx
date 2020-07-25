@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import IconButton from "@material-ui/core/IconButton";
-import OpenInBrowserIcon from "@material-ui/icons/OpenInBrowser";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import OpenDialog from "./OpenDialog";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
@@ -15,32 +15,28 @@ const EditingButtons = props => {
   const [editClicked, setEditClicked] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(false);
 
-  const handleOpenClicked = (event, e) => {
-    console.log(
-      "NL: EditingButtons.jsx: handleOpenClicked props.user: ",
-      props.user
-    );
+  const handleOpenClicked = e => {
     setOpenClicked(!openClicked);
   };
 
   const handleEditClicked = () => {
-    setOpenClicked(!openClicked);
+    setEditClicked(!editClicked);
   };
 
   const handleDeleteClicked = () => {
-    setOpenClicked(!openClicked);
+    setDeleteClicked(!deleteClicked);
   };
 
   return (
     <>
-      <ButtonGroup onClick={handleOpenClicked}>
-        <IconButton>
-          <OpenInBrowserIcon />
+      <ButtonGroup>
+        <IconButton onClick={handleOpenClicked}>
+          <VisibilityIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={handleEditClicked}>
           <EditIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={handleDeleteClicked}>
           <DeleteForeverIcon />
         </IconButton>
       </ButtonGroup>
@@ -55,7 +51,7 @@ const EditingButtons = props => {
         <EditDialog
           handleEditClicked={handleEditClicked}
           editClicked={editClicked}
-          users={props.users}
+          user={props.user}
         />
       )}
       {deleteClicked && (

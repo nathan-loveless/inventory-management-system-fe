@@ -4,6 +4,9 @@ export const openDialogStyles = makeStyles(theme => ({
   dialogMain: {
     background: theme.palette.secondary.light
   },
+  dialogTitle: {
+    textAlign: "center"
+  },
   grid: {
     display: "flex",
     justifyContent: "center",

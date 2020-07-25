@@ -19,7 +19,7 @@ const OpenDialog = props => {
       open={props.openClicked}
     >
       <DialogContent className={classes.dialogMain}>
-        <DialogTitle id="open-dialog-title">
+        <DialogTitle id="open-dialog-title" className={classes.dialogTitle}>
           User Details - Read Only
         </DialogTitle>
         <Grid container spacing={0} className={classes.grid}>

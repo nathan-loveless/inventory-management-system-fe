@@ -7,6 +7,8 @@ export const LOGOUT = "LOGOUT";
 export const GET_ACTIVE_USERS = "GET_ACTIVE_USERS";
 export const GET_INACTIVE_USERS = "GET_INACTIVE_USERS";
 export const GET_PENDING_USERS = "GET_PENDING_USERS";
+export const UPDATE_USER = "UPDATE_USER";
+export const DELETE_USER = "DELETE_USER";
 export const TASK_FAIL = "TASK_FAIL";
 export const TASK_START = "TASK_START";
 
@@ -85,6 +87,66 @@ export const getPendingUsers = () => dispatch => {
     .then(res => {
       console.log("NL: getPendingUsers res.data: ", res.data);
       dispatch({ type: GET_PENDING_USERS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: TASK_FAIL, payload: err.message });
+      console.log(err);
+    });
+};
+
+export const updateUser = (data, prevStatus) => dispatch => {
+  let url = "";
+  console.log("NL: actions.js: updateUser (not inside ifs): data: ", data);
+
+  if (prevStatus === "pending" && data.status !== "pending") {
+    data.role = "none";
+    url = `${process.env.REACT_APP_BASE_API_URL}/activateuser/${data.id}`;
+  } else if (prevStatus !== "pending" && data.status === "pending") {
+    data.role = "none";
+    url = `${process.env.REACT_APP_BASE_API_URL}/deactiveuser/${data.id}`;
+  } else if (data.status === "inactive" && data.role != "none") {
+    data.role = "none";
+    url = `${process.env.REACT_APP_BASE_API_URL}/updateuser/${data.id}`;
+  } else if (data.status === "active" && data.role === "none") {
+    data.role = "read";
+    url = `${process.env.REACT_APP_BASE_API_URL}/updateuser/${data.id}`;
+  } else {
+    url = `${process.env.REACT_APP_BASE_API_URL}/updateuser/${data.id}`;
+    console.log(
+      "NL: actions.js: updateUsers: data: ",
+      data,
+      " prevStatus: ",
+      prevStatus,
+      "URL: ",
+      url
+    );
+  }
+
+  axiosWithAuth()
+    .delete(url, data)
+    .then(res => {
+      dispatch({
+        type: GET_PENDING_USERS,
+        payload: { data: res.data, prevStatus: prevStatus }
+      });
+    })
+    .catch(err => {
+      dispatch({ type: TASK_FAIL, payload: err.message });
+      console.log(err);
+    });
+};
+
+export const deleteUser = (data, prevStatus) => dispatch => {
+  axiosWithAuth()
+    .put(
+      `${process.env.REACT_APP_BASE_API_URL}/users/deleteuser/${data.id}`,
+      data
+    )
+    .then(res => {
+      dispatch({
+        type: DELETE_USER,
+        payload: { data: res.data, prevStatus: prevStatus }
+      });
     })
     .catch(err => {
       dispatch({ type: TASK_FAIL, payload: err.message });
