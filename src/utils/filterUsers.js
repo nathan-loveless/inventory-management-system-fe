@@ -1,7 +1,7 @@
 import sortUsers from "./sortUsers";
 import searchUsers from "./searchUsers";
 
-const filterUsers = (data, value, sorted, search) => {
+export const filterUsers = (data, value, sorted, search) => {
   console.log("filteredUsers", value);
   switch (value) {
     case 0: {
@@ -43,4 +43,4 @@ const filterUsers = (data, value, sorted, search) => {
   }
 };
 
-export default filterUsers;
+export const filteredInventory = data => {};

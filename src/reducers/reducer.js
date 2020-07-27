@@ -5,6 +5,9 @@ import {
   GET_USERS,
   UPDATE_USER,
   DELETE_USER,
+  ADD_INVENTORY,
+  UPDATE_INVENTORY,
+  DELETE_INVENTORY,
   TASK_START,
   TASK_FAIL
 } from "../actions/actions";
@@ -27,16 +30,13 @@ const initialState = {
 
   message: "",
   isAdmin: false,
-  users: []
+  users: [],
+  inventory: []
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case REGISTER_ACCOUNT: {
-      console.log(
-        "NL: Reducers: Register: action.payload: ",
-        action.payload.message
-      );
       return {
         ...state,
         message: action.payload.message
@@ -78,6 +78,35 @@ function reducer(state = initialState, action) {
         ...state,
         users: state.users.filter(user => {
           return user.id !== action.payload;
+        })
+      };
+    }
+
+    case ADD_INVENTORY: {
+      const addInventory = state.inventory.map((inv, index) => {
+        if (inv.id === action.payload.id) {
+          return action.payload;
+        }
+        return inv;
+      });
+      return { ...state, inventory: addInventory };
+    }
+
+    case UPDATE_INVENTORY: {
+      const updateInventory = state.inventory.map((inv, index) => {
+        if (inv.id === action.payload.id) {
+          return action.payload;
+        }
+        return inv;
+      });
+      return { ...state, inventory: updateInventory };
+    }
+
+    case DELETE_INVENTORY: {
+      return {
+        ...state,
+        inventory: state.inventory.filter(inv => {
+          return inv.id !== action.payload;
         })
       };
     }

@@ -9,6 +9,9 @@ export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER = "DELETE_USER";
 export const TASK_FAIL = "TASK_FAIL";
 export const TASK_START = "TASK_START";
+export const ADD_INVENTORY = "ADD_INVENTORY";
+export const UPDATE_INVENTORY = "UPDATE_INVENTORY";
+export const DELETE_INVENTORY = "DELETE_INVENTORY";
 
 export const taskStart = () => dispatch => {
   dispatch({
@@ -101,3 +104,9 @@ export const deleteUser = id => dispatch => {
       console.log(err);
     });
 };
+
+export const addInventory = data => dispatch => {};
+
+export const updateInventory = data => dispatch => {};
+
+export const deleteInventory = id => dispatch => {};

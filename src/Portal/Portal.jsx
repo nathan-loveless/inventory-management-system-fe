@@ -3,7 +3,7 @@ import PortalNav from "./PortalNav/PortalNav";
 import PortalMain from "./PortalMain/PortalMain";
 import Dashboard from "./PortalComponents/Dashboard";
 import { portalStyles } from "../materialui/styles/portalStyles";
-import InventoryManagement from "./PortalComponents/InventoryManagement";
+import InventoryManagement from "./PortalComponents//InventoryManagement/InventoryManagement";
 import Invoicing from "./PortalComponents/Invoicing";
 import Reports from "./PortalComponents/Reports";
 import Administration from "./PortalComponents/Administration/Administration";

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { activeUsersStyles } from "../../../materialui/styles/activeUsersStyles";
 import PortalToolbar from "../PortalToolbar";
 import EditingButtons from "./EditingButtons";
-import filteredUsers from "../../../utils/filterUsers";
+import { filterUsers } from "../../../utils/filterUsers";
 
 const DisplayUsers = props => {
   const classes = activeUsersStyles();
@@ -12,12 +12,7 @@ const DisplayUsers = props => {
 
   useEffect(() => {
     setAllUsers([
-      filteredUsers(
-        props.users,
-        props.value,
-        props.sortedData,
-        props.searchData
-      )
+      filterUsers(props.users, props.value, props.sortedData, props.searchData)
     ]);
   }, [props.value, props.users, props.sortedData, props.searchData]);
 
