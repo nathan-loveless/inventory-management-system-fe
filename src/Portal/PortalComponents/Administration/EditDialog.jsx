@@ -16,7 +16,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 const EditDialog = props => {
   const { register, errors, handleSubmit, control } = useForm();
   const [user, setUser] = useState(props.user);
-  const [value, setValue] = useState(true);
+  const [shrinkValue, setValue] = useState(true);
 
   const classes = formStyles();
   const sharedClasses = sharedStyles();
@@ -70,7 +70,7 @@ const EditDialog = props => {
                         setUser(e.target.name, e.target.value);
                       }}
                       textfieldProps={{
-                        InputLabelProps: value ? { shrink: true } : {}
+                        InputLabelProps: shrinkValue ? { shrink: true } : {}
                       }}
                       inputRef={register({
                         required: "First name is required",

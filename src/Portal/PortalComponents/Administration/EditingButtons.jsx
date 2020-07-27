@@ -7,6 +7,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import OpenDialog from "./OpenDialog";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
+import { Tooltip } from "@material-ui/core";
 
 // These are the index arrays of the
 
@@ -30,15 +31,21 @@ const EditingButtons = props => {
   return (
     <>
       <ButtonGroup>
-        <IconButton onClick={handleOpenClicked}>
-          <VisibilityIcon />
-        </IconButton>
-        <IconButton onClick={handleEditClicked}>
-          <EditIcon />
-        </IconButton>
-        <IconButton onClick={handleDeleteClicked}>
-          <DeleteForeverIcon />
-        </IconButton>
+        <Tooltip title="View">
+          <IconButton onClick={handleOpenClicked}>
+            <VisibilityIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Edit">
+          <IconButton onClick={handleEditClicked}>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Delete">
+          <IconButton onClick={handleDeleteClicked}>
+            <DeleteForeverIcon />
+          </IconButton>
+        </Tooltip>
       </ButtonGroup>
       {openClicked && (
         <OpenDialog

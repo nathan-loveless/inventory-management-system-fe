@@ -7,32 +7,48 @@ export const administrationStyles = makeStyles(theme => ({
   menuBar: {
     background: "#dcd0a3",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "row"
   },
-
+  tabBar: { width: "100%" },
   title: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
     }
   },
+  grid: {
+    display: "flex",
+    justifyContent: "flex-end",
+    flexDirection: "row",
+    height: "100%",
+    boxSizing: "border-box",
+    marginTop: "5px"
+  },
+
+  searchGrid: {
+    flexDirection: "row"
+  },
+  submit: {
+    background: theme.palette.primary.light,
+    margin: theme.spacing(0, 0, 2)
+  },
   search: {
-    //position: "relative",
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25)
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto"
     }
-    // marginRight: theme.spacing(2),
-    // marginLeft: 0,
-    // width: "100%",
-    // [theme.breakpoints.up("sm")]: {
-    //   marginLeft: theme.spacing(3),
-    //   width: "auto"
-    // }
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -52,5 +68,10 @@ export const administrationStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       width: "20ch"
     }
+  },
+  sortButton: {
+    background: theme.palette.primary.light,
+    borderRadius: "10px",
+    margin: "5px"
   }
 }));

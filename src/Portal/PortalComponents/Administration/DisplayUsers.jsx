@@ -4,36 +4,22 @@ import { connect } from "react-redux";
 import { activeUsersStyles } from "../../../materialui/styles/activeUsersStyles";
 import PortalToolbar from "../PortalToolbar";
 import EditingButtons from "./EditingButtons";
+import filteredUsers from "../../../utils/filterUsers";
 
 const DisplayUsers = props => {
   const classes = activeUsersStyles();
   const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
-    switch (props.value) {
-      case 0: {
-        setAllUsers([props.users]);
-        break;
-      }
-
-      case 1: {
-        setAllUsers([props.users.filter(e => e.status === "active")]);
-        break;
-      }
-      case 2: {
-        setAllUsers([props.users.filter(e => e.status === "inactive")]);
-        break;
-      }
-      case 3: {
-        setAllUsers([props.users.filter(e => e.status === "pending")]);
-        break;
-      }
-      default: {
-        setAllUsers([props.users]);
-        break;
-      }
-    }
-  }, [props.value, props.users]);
+    setAllUsers([
+      filteredUsers(
+        props.users,
+        props.value,
+        props.sortedData,
+        props.searchData
+      )
+    ]);
+  }, [props.value, props.users, props.sortedData, props.searchData]);
 
   return (
     <>

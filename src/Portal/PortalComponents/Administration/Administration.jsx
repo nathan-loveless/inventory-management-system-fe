@@ -7,6 +7,8 @@ import AdministrationHeader from "./AdministrationHeader";
 
 const Administration = props => {
   const [value, setValue] = useState(0);
+  const [sortedData, setSortedData] = useState("");
+  const [searchData, setSearchData] = useState("");
 
   const classes = administrationStyles();
 
@@ -37,13 +39,29 @@ const Administration = props => {
     props.deleteUser(id);
   };
 
+  const applySortedData = choice => {
+    setSortedData(choice);
+    console.log("Tab Value", value);
+  };
+
+  const handleSearch = text => {
+    setSearchData(text);
+  };
+
   return (
     <>
-      <AdministrationHeader handleChange={handleChange} value={value} />
+      <AdministrationHeader
+        handleChange={handleChange}
+        value={value}
+        applySortedData={applySortedData}
+        handleSearch={handleSearch}
+      />
       <DisplayUsers
         value={value}
         submitEditedData={submitEditedData}
         submitDelete={submitDelete}
+        sortedData={sortedData}
+        searchData={searchData}
       />
     </>
   );
