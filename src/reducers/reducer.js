@@ -2,9 +2,7 @@ import {
   REGISTER_ACCOUNT,
   LOGIN,
   LOGOUT,
-  GET_ACTIVE_USERS,
-  GET_INACTIVE_USERS,
-  GET_PENDING_USERS,
+  GET_USERS,
   UPDATE_USER,
   DELETE_USER,
   TASK_START,
@@ -29,9 +27,7 @@ const initialState = {
 
   message: "",
   isAdmin: false,
-  activeUsers: [],
-  inactiveUsers: [],
-  pendingUsers: []
+  users: []
 };
 
 function reducer(state = initialState, action) {
@@ -63,26 +59,27 @@ function reducer(state = initialState, action) {
       };
     }
 
-    case GET_ACTIVE_USERS: {
-      console.log(
-        "NL: reducer.js: GET_ACTIVE_USERS: payload: ",
-        action.payload
-      );
-      return { ...state, activeUsers: action.payload };
-    }
-    case GET_INACTIVE_USERS: {
-      return { ...state, inactiveUsers: action.payload };
-    }
-    case GET_PENDING_USERS: {
-      return { ...state, pendingUsers: action.payload };
+    case GET_USERS: {
+      return { ...state, users: action.payload };
     }
 
     case UPDATE_USER: {
-      return { ...state, user: action.payload };
+      const updateUsers = state.users.map((user, index) => {
+        if (user.id === action.payload.id) {
+          return action.payload;
+        }
+        return user;
+      });
+      return { ...state, users: updateUsers };
     }
 
     case DELETE_USER: {
-      return { ...state, user: action.payload };
+      return {
+        ...state,
+        users: state.users.filter(user => {
+          return user.id !== action.payload;
+        })
+      };
     }
 
     case TASK_START: {

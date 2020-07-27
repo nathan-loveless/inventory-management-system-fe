@@ -1,31 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
+import { connect } from "react-redux";
 import { activeUsersStyles } from "../../../materialui/styles/activeUsersStyles";
 import PortalToolbar from "../PortalToolbar";
 import EditingButtons from "./EditingButtons";
 
 const DisplayUsers = props => {
-  //const [openClicked, setOpenClicked] = useState(false);
-  const [editClicked, setEditClicked] = useState(false);
-  const [deleteClicked, setDeleteClicked] = useState(false);
-
   const classes = activeUsersStyles();
+  const [allUsers, setAllUsers] = useState([]);
 
-  // const handleOpenClicked = () => {
-  //   setOpenClicked(!openClicked);
-  // };
+  useEffect(() => {
+    switch (props.value) {
+      case 0: {
+        setAllUsers([props.users]);
+        break;
+      }
 
-  const handleEditClicked = () => {
-    setEditClicked(!editClicked);
-  };
-
-  const handleDeleteClicked = () => {
-    setDeleteClicked(!deleteClicked);
-  };
+      case 1: {
+        setAllUsers([props.users.filter(e => e.status === "active")]);
+        break;
+      }
+      case 2: {
+        setAllUsers([props.users.filter(e => e.status === "inactive")]);
+        break;
+      }
+      case 3: {
+        setAllUsers([props.users.filter(e => e.status === "pending")]);
+        break;
+      }
+      default: {
+        setAllUsers([props.users]);
+        break;
+      }
+    }
+  }, [props.value, props.users]);
 
   return (
     <>
-      {props.users.map(users =>
+      {allUsers.map(users =>
         users.map(user => (
           <Grid container spacing={0} className={classes.grid}>
             <Grid item xs className={classes.gridItem}>
@@ -55,7 +67,11 @@ const DisplayUsers = props => {
             <Grid item xs className={classes.gridItem}>
               {user.role}
             </Grid>
-            <EditingButtons user={user} />
+            <EditingButtons
+              user={user}
+              submitEditedData={props.submitEditedData}
+              submitDelete={props.submitDelete}
+            />
           </Grid>
         ))
       )}
@@ -63,4 +79,8 @@ const DisplayUsers = props => {
   );
 };
 
-export default DisplayUsers;
+const mapStateToProps = state => ({
+  users: state.users
+});
+
+export default connect(mapStateToProps, {})(DisplayUsers);

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+
 import Dialog from "@material-ui/core/Dialog";
 import { DialogTitle, Grid, DialogContent } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
-import { updateUser } from "../../../actions/actions";
+
 import { sharedStyles } from "../../../materialui/styles/sharedStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -23,23 +23,7 @@ const EditDialog = props => {
 
   const onSubmit = (data, e) => {
     e.preventDefault();
-    //console.log("NL: EditDialog.jsx: onSubmit: data: ", data);
-    props.updateUser(
-      {
-        id: props.user.id,
-        username: data.username,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        address: data.address,
-        city: data.city,
-        state: data.state,
-        status: data.status,
-        role: data.role
-      },
-      props.user.status
-    );
-
+    props.submitEditedData(data, props.user.id, props.user.status);
     props.handleEditClicked();
   };
 
@@ -370,6 +354,4 @@ const EditDialog = props => {
   );
 };
 
-const mapStateToProps = state => ({});
-
-export default connect(mapStateToProps, { updateUser })(EditDialog);
+export default EditDialog;

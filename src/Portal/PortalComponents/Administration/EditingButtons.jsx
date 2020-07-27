@@ -51,18 +51,22 @@ const EditingButtons = props => {
         <EditDialog
           handleEditClicked={handleEditClicked}
           editClicked={editClicked}
+          submitEditedData={props.submitEditedData}
           user={props.user}
         />
       )}
       {deleteClicked && (
         <DeleteDialog
-          handleDeletetClicked={handleDeleteClicked}
-          DleteClicked={deleteClicked}
-          users={props.users}
+          handleDeleteClicked={handleDeleteClicked}
+          deleteClicked={deleteClicked}
+          submitDelete={props.submitDelete}
+          user={props.user}
         />
       )}
     </>
   );
 };
+
+const mapStateToProps = state => ({});
 
 export default EditingButtons;
