@@ -15,6 +15,7 @@ const DeleteDialog = props => {
   const submitDelete = e => {
     e.preventDefault();
     props.submitDelete(props.inventory.id);
+    handleDeleteClosed();
   };
 
   return (
@@ -25,7 +26,7 @@ const DeleteDialog = props => {
     >
       <DialogContent className={classes.dialogMain}>
         <DialogTitle id="delete-dialog-title" className={classes.dialogTitle}>
-          Confirm Delete User?
+          Confirm Delete Inventory?
         </DialogTitle>
         <Grid container component="main" className={classes.grid}>
           <Grid item xs={12} elevation={6} square className={classes.gridItem}>

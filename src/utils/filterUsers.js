@@ -1,8 +1,7 @@
-import sortUsers from "./sortUsers";
-import searchUsers from "./searchUsers";
+import { sortUsers, sortInventory } from "./sortUsers";
+import { searchUsers, searchInventory } from "./searchUsers";
 
 export const filterUsers = (data, value, sorted, search) => {
-  console.log("filteredUsers", value);
   switch (value) {
     case 0: {
       return sortUsers(searchUsers(data, search), sorted);
@@ -43,4 +42,6 @@ export const filterUsers = (data, value, sorted, search) => {
   }
 };
 
-export const filteredInventory = data => {};
+export const filterInventory = (data, sorted, search) => {
+  return sortInventory(searchInventory(data, search), sorted);
+};

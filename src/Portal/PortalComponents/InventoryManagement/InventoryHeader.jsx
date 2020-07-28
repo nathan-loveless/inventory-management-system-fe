@@ -5,11 +5,14 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import CreateDialog from "./CreateDialog";
 
 const InventoryHeader = props => {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchInput, setSearchInput] = useState("");
+  const [createClicked, setCreateClicked] = useState(false);
 
   const classes = administrationStyles();
 
@@ -28,6 +31,10 @@ const InventoryHeader = props => {
     setOpen(false);
   };
 
+  const handleCreateClicked = () => {
+    setCreateClicked(!createClicked);
+  };
+
   const handleSearch = e => {
     setSearchInput(e.target.value);
   };
@@ -39,8 +46,20 @@ const InventoryHeader = props => {
   return (
     <div className={classes.menuBarMain}>
       <AppBar position="static" className={classes.menuBar}>
+        <Grid container spacing={0} className={classes.createGrid}>
+          <Grid item xs={2} className={classes.dontKnow}>
+            <Button
+              variant="contained"
+              className={classes.createButton}
+              onClick={handleCreateClicked}
+              endIcon={<AddIcon></AddIcon>}
+            >
+              Create
+            </Button>
+          </Grid>
+        </Grid>
         <Grid container spacing={0} className={classes.grid}>
-          <Grid item xs={6} className={classes.searchG}>
+          <Grid item xs={5} className={classes.searchGrid}>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -87,6 +106,18 @@ const InventoryHeader = props => {
               <MenuItem value="name-descending" onClick={handleMenuClicked}>
                 Name: Descending
               </MenuItem>
+              <MenuItem value="sku-ascending" onClick={handleMenuClicked}>
+                SKU: Ascending
+              </MenuItem>
+              <MenuItem value="sku-descending" onClick={handleMenuClicked}>
+                SKU: Descending
+              </MenuItem>
+              <MenuItem value="supplier-ascending" onClick={handleMenuClicked}>
+                Supplier: Ascending
+              </MenuItem>
+              <MenuItem value="supplier-descending" onClick={handleMenuClicked}>
+                Supplier: Descending
+              </MenuItem>
               <MenuItem value="price-ascending" onClick={handleMenuClicked}>
                 Price: Ascending
               </MenuItem>
@@ -99,10 +130,23 @@ const InventoryHeader = props => {
               <MenuItem value="instock-descending" onClick={handleMenuClicked}>
                 In-Stock: Descending
               </MenuItem>
+              <MenuItem value="status-ascending" onClick={handleMenuClicked}>
+                Status: Ascending
+              </MenuItem>
+              <MenuItem value="status-descending" onClick={handleMenuClicked}>
+                Status: Descending
+              </MenuItem>
             </Menu>
           </Grid>
         </Grid>
       </AppBar>
+      {createClicked && (
+        <CreateDialog
+          handleCreateClicked={handleCreateClicked}
+          createClicked={createClicked}
+          submitCreatedData={props.submitCreatedData}
+        />
+      )}
     </div>
   );
 };

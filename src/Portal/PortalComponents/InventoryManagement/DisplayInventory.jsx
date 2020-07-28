@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { activeUsersStyles } from "../../../materialui/styles/activeUsersStyles";
 import PortalToolbar from "../PortalToolbar";
 import EditingButtons from "./EditingButtons";
-import { filteredUsers, filteredInventory } from "../../../utils/filterUsers";
+import { filterInventory } from "../../../utils/filterUsers";
 
 const DisplayInventory = props => {
   const classes = activeUsersStyles();
@@ -12,8 +12,9 @@ const DisplayInventory = props => {
 
   useEffect(() => {
     setInventory([
-      filteredInventory(props.users, props.sortedData, props.searchData)
+      filterInventory(props.inventory, props.sortedData, props.searchData)
     ]);
+    console.log("NL: DisplayInventory.jsx: useEffect: ", props.inventory);
   }, [props.inventory, props.sortedData, props.searchData]);
 
   return (
@@ -22,18 +23,28 @@ const DisplayInventory = props => {
         inv.map(item => (
           <Grid container spacing={0} className={classes.grid}>
             <Grid item xs className={classes.gridItem}>
-              {inventory.name}
+              {item.name}
             </Grid>
             <Grid item xs className={classes.gridItem}>
-              {`$${inventory.price}`}
+              {item.sku}
+            </Grid>
+            <Grid item xs className={classes.gridItem}>
+              {item.supplier}
+            </Grid>
+            <Grid item xs className={classes.gridItem}>
+              {`$${item.price}`}
             </Grid>
             <Grid item xs={3} className={classes.gridItem}>
-              {inventory.inStock}
+              {item.inStock}
+            </Grid>
+            <Grid item xs className={classes.gridItem}>
+              {item.status}
             </Grid>
             <EditingButtons
-              inventory={inv}
+              inventory={item}
               submitEditedData={props.submitEditedData}
               submitDelete={props.submitDelete}
+              submitCreatedData={props.submitCreatedData}
             />
           </Grid>
         ))

@@ -9,6 +9,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER = "DELETE_USER";
 export const TASK_FAIL = "TASK_FAIL";
 export const TASK_START = "TASK_START";
+export const GET_INVENTORY = "GET_INVENTORY";
 export const ADD_INVENTORY = "ADD_INVENTORY";
 export const UPDATE_INVENTORY = "UPDATE_INVENTORY";
 export const DELETE_INVENTORY = "DELETE_INVENTORY";
@@ -41,6 +42,7 @@ export const userLogon = (data, props) => dispatch => {
       dispatch({ type: LOGIN, payload: res.data });
       if (res.data.user.role === "admin") {
         dispatch(getUsers());
+        dispatch(getInventory());
       }
       props.history.push("/portal");
     })
@@ -105,8 +107,52 @@ export const deleteUser = id => dispatch => {
     });
 };
 
-export const addInventory = data => dispatch => {};
+export const getInventory = () => dispatch => {
+  axiosWithAuth()
+    .get(`${process.env.REACT_APP_BASE_API_URL}/inventory`)
+    .then(res => {
+      dispatch({ type: GET_INVENTORY, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: TASK_FAIL, payload: err.message });
+      console.log(err);
+    });
+};
+export const addInventory = data => dispatch => {
+  axiosWithAuth()
+    .post(`${process.env.REACT_APP_BASE_API_URL}/inventory/`, data)
+    .then(res => {
+      dispatch({ type: ADD_INVENTORY, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: TASK_FAIL, payload: err.message });
+      console.log(err.message);
+    });
+};
 
-export const updateInventory = data => dispatch => {};
+export const updateInventory = data => dispatch => {
+  axiosWithAuth()
+    .put(`${process.env.REACT_APP_BASE_API_URL}/inventory/${data.id}`, data)
+    .then(res => {
+      dispatch({ type: UPDATE_INVENTORY, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: TASK_FAIL, payload: err.message });
+      console.log(err.message);
+    });
+};
 
-export const deleteInventory = id => dispatch => {};
+export const deleteInventory = id => dispatch => {
+  axiosWithAuth()
+    .delete(`${process.env.REACT_APP_BASE_API_URL}/inventory/${id}`, id)
+    .then(res => {
+      dispatch({
+        type: DELETE_INVENTORY,
+        payload: id
+      });
+    })
+    .catch(err => {
+      dispatch({ type: TASK_FAIL, payload: err.message });
+      console.log(err);
+    });
+};

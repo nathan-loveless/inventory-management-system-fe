@@ -24,5 +24,9 @@ export const formStyles = makeStyles(theme => ({
   signIn: {
     display: "flex",
     justifyContent: "flex-center"
+  },
+
+  createControl: {
+    width: "100%"
   }
 }));

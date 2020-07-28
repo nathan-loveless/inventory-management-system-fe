@@ -5,6 +5,7 @@ import {
   GET_USERS,
   UPDATE_USER,
   DELETE_USER,
+  GET_INVENTORY,
   ADD_INVENTORY,
   UPDATE_INVENTORY,
   DELETE_INVENTORY,
@@ -82,14 +83,19 @@ function reducer(state = initialState, action) {
       };
     }
 
+    case GET_INVENTORY: {
+      return { ...state, inventory: action.payload };
+    }
+
     case ADD_INVENTORY: {
-      const addInventory = state.inventory.map((inv, index) => {
-        if (inv.id === action.payload.id) {
-          return action.payload;
-        }
-        return inv;
-      });
-      return { ...state, inventory: addInventory };
+      // const addInventory = state.inventory.map((inv, index) => {
+      //   if (inv.id === action.payload.id) {
+      //     return action.payload;
+      //   }
+      //   return inv;
+      // });
+      // return { ...state, inventory: addInventory };
+      return { ...state, inventory: [...state.inventory, action.payload] };
     }
 
     case UPDATE_INVENTORY: {

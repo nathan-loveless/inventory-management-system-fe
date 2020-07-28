@@ -16,16 +16,30 @@ const InventoryManagement = props => {
   const classes = administrationStyles();
 
   const submitEditedData = (data, id, prevStatus) => {
-    props.updateUser({
+    props.updateInventory({
       id: id,
       name: data.username,
+      sku: data.sku,
+      supplier: data.supplier,
+      price: data.price,
       inStock: data.inStock,
-      price: data.price
+      status: data.status
+    });
+  };
+
+  const submitCreatedData = data => {
+    props.addInventory({
+      name: data.name,
+      sku: data.sku,
+      supplier: data.supplier,
+      price: data.price,
+      inStock: data.inStock,
+      status: data.status
     });
   };
 
   const submitDelete = id => {
-    props.deleteUser(id);
+    props.deleteInventory(id);
   };
 
   const applySortedData = choice => {
@@ -41,6 +55,7 @@ const InventoryManagement = props => {
       <InventoryHeader
         applySortedData={applySortedData}
         handleSearch={handleSearch}
+        submitCreatedData={submitCreatedData}
       />
       <DisplayInventory
         submitEditedData={submitEditedData}

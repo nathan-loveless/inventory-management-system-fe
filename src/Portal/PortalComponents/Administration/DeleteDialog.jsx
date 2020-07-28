@@ -15,6 +15,7 @@ const DeleteDialog = props => {
   const submitDelete = e => {
     e.preventDefault();
     props.submitDelete(props.user.id);
+    handleDeleteClosed();
   };
 
   return (

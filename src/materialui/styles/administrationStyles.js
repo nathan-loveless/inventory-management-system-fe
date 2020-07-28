@@ -19,18 +19,17 @@ export const administrationStyles = makeStyles(theme => ({
   grid: {
     display: "flex",
     justifyContent: "flex-end",
-    flexDirection: "row",
-    height: "100%",
-    boxSizing: "border-box",
-    marginTop: "5px"
+    flexDirection: "row"
+    //height: "100%",
+    //boxSizing: "border-box",
+    //marginTop: "5px"
   },
 
   searchGrid: {
     flexDirection: "row"
   },
   submit: {
-    background: theme.palette.primary.light,
-    margin: theme.spacing(0, 0, 2)
+    background: theme.palette.primary.light
   },
   search: {
     position: "relative",
@@ -40,7 +39,7 @@ export const administrationStyles = makeStyles(theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
     marginRight: theme.spacing(2),
-    marginLeft: 0,
+    margin: "4px 0 4px 0",
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
@@ -72,6 +71,11 @@ export const administrationStyles = makeStyles(theme => ({
   sortButton: {
     background: theme.palette.primary.light,
     borderRadius: "10px",
-    margin: "5px"
+    margin: "4px"
+  },
+  createButton: {
+    background: theme.palette.primary.main,
+    borderRadius: "10px",
+    margin: "4px"
   }
 }));

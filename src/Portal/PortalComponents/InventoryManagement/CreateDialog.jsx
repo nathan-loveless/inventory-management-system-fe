@@ -13,9 +13,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-const EditDialog = props => {
+const CreateDialog = props => {
   const { register, errors, handleSubmit, control } = useForm();
-  const [inventory, setInventory] = useState(props.inventory);
   const [shrinkValue, setValue] = useState(true);
 
   const classes = formStyles();
@@ -23,19 +22,20 @@ const EditDialog = props => {
 
   const onSubmit = (data, e) => {
     e.preventDefault();
-    props.submitEditedData(data, props.inventory.id);
-    props.handleEditClicked();
+    console.log("NL: CreateDialog.jsx: onSubmit: data: ", data);
+    props.submitCreatedData(data);
+    props.handleCreateClicked();
   };
 
   const handleEditClosed = () => {
-    props.handleEditClicked();
+    props.handleCreateClicked();
   };
 
   return (
     <Dialog
       onClose={handleEditClosed}
       aria-labelledby="edit-dialog-title"
-      open={props.editClicked}
+      open={props.createClicked}
     >
       <DialogContent className={sharedClasses.dialogMain}>
         <DialogTitle
@@ -60,15 +60,11 @@ const EditDialog = props => {
                       variant="outlined"
                       required
                       fullWidth
-                      defaultValue={inventory.name}
                       id="name"
                       label=" Name"
                       color="secondary"
                       htmlFor="name"
                       autoComplete="name"
-                      onChange={e => {
-                        setInventory(e.target.name, e.target.value);
-                      }}
                       textfieldProps={{
                         InputLabelProps: shrinkValue ? { shrink: true } : {}
                       }}
@@ -89,15 +85,11 @@ const EditDialog = props => {
                       variant="outlined"
                       required
                       fullWidth
-                      defaultValue={inventory.sku}
                       id="sku"
                       label=" SKU"
                       color="secondary"
                       htmlFor="sku"
                       autoComplete="sku"
-                      onChange={e => {
-                        setInventory(e.target.name, e.target.value);
-                      }}
                       textfieldProps={{
                         InputLabelProps: shrinkValue ? { shrink: true } : {}
                       }}
@@ -105,7 +97,6 @@ const EditDialog = props => {
                         required: "SKU is required",
                         message: "SKU is required"
                       })}
-                      autoFocus
                     />
                     {errors.sku && (
                       <div className={classes.error}>{errors.sku.message}</div>
@@ -118,15 +109,11 @@ const EditDialog = props => {
                       variant="outlined"
                       required
                       fullWidth
-                      defaultValue={inventory.supplier}
                       id="supplier"
                       label=" Supplier"
                       color="secondary"
                       htmlFor="supplier"
                       autoComplete="supplier"
-                      onChange={e => {
-                        setInventory(e.target.name, e.target.value);
-                      }}
                       textfieldProps={{
                         InputLabelProps: shrinkValue ? { shrink: true } : {}
                       }}
@@ -134,7 +121,6 @@ const EditDialog = props => {
                         required: "Supplier is required",
                         message: "Supplier is required"
                       })}
-                      autoFocus
                     />
                     {errors.supplier && (
                       <div className={classes.error}>
@@ -142,22 +128,18 @@ const EditDialog = props => {
                       </div>
                     )}
                   </Grid>
-                  <Grid item xs={3} sm={6}>
+                  <Grid item xs={3}>
                     <TextField
                       type="text"
                       name="price"
                       variant="outlined"
                       required
                       fullWidth
-                      defaultValue={inventory.price}
                       id="price"
                       label="Price"
                       color="secondary"
                       htmlFor="price"
                       autoComplete="price"
-                      onChange={e => {
-                        setInventory(e.target.name, e.target.value);
-                      }}
                       inputRef={register({
                         required: "You must provide a price",
                         pattern: {
@@ -179,15 +161,11 @@ const EditDialog = props => {
                       variant="outlined"
                       required
                       fullWidth
-                      defaultValue={inventory.inStock}
                       id="inStock"
                       label="In Stock"
                       color="secondary"
                       htmlFor="inStock"
                       autoComplete="inStock"
-                      onChange={e => {
-                        setInventory(e.target.name, e.target.value);
-                      }}
                       inputRef={register({
                         required: "You must provide the amount of stock",
                         pattern: {
@@ -205,7 +183,7 @@ const EditDialog = props => {
                   <Grid item xs={3}>
                     <FormControl
                       variant="outlined"
-                      className={classes.formControl}
+                      className={classes.createControl}
                     >
                       <InputLabel id="status-select-label">Status</InputLabel>
                       <Controller
@@ -215,9 +193,6 @@ const EditDialog = props => {
                             id="status-select-outlined"
                             label="Status"
                             color="secondary"
-                            onChange={e => {
-                              setInventory(e.target.name, e.target.value);
-                            }}
                           >
                             <MenuItem value={"available"}>available</MenuItem>
                             <MenuItem value={"delayed"}>delayed</MenuItem>
@@ -231,7 +206,6 @@ const EditDialog = props => {
                         }
                         name="status"
                         control={control}
-                        defaultValue={inventory.status}
                       />
                     </FormControl>
                   </Grid>
@@ -254,4 +228,4 @@ const EditDialog = props => {
   );
 };
 
-export default EditDialog;
+export default CreateDialog;

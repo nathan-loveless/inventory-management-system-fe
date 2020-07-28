@@ -1,6 +1,4 @@
-const searchUsers = (data, search) => {
-  console.log("NL: searchUsers.js: searchUsrs: data: ", data);
-  console.log("NL: searchUsers.js: searchUsrs: search: ", search);
+export const searchUsers = (data, search) => {
   if (search === "") {
     return data;
   }
@@ -27,4 +25,33 @@ const searchUsers = (data, search) => {
   return searchData;
 };
 
-export default searchUsers;
+export const searchInventory = (data, search) => {
+  if (search === "") {
+    return data;
+  }
+
+  console.log(data, search);
+
+  let searchData = data.filter(inv => {
+    if (inv !== "") {
+      return (
+        inv.name.toLowerCase().includes(search.toLowerCase()) ||
+        inv.price
+          .toString()
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        inv.inStock
+          .toString()
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        inv.sku.toLowerCase().includes(search.toLowerCase()) ||
+        inv.supplier.toLowerCase().includes(search.toLowerCase()) ||
+        inv.status.toLowerCase().includes(search.toLowerCase())
+      );
+    } else {
+      return;
+    }
+  });
+
+  return searchData;
+};
